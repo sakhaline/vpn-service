@@ -24,6 +24,7 @@ def create_app(config_class=Config):
 
     @login_manager.user_loader
     def load_user(user_id):
-        return db.session.execute(db.select(User).where(User.id == user_id)).scalar()
+        return db.session.execute(db.select(User)
+                                  .where(User.id == user_id)).scalar()
 
     return app

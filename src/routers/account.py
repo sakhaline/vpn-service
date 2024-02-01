@@ -45,6 +45,7 @@ def update_user():
     if request.method == "POST":
         print(form.data)
         if form.validate_on_submit():
-            UserService(UserRepository(db)).update_user(current_user, form.data)
+            UserService(UserRepository(db)).update_user(current_user,
+                                                        form.data)
         return redirect(url_for("profile.get_profile"))
     return render_template("account/update.html", form=form)

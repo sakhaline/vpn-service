@@ -14,7 +14,8 @@ def proxy_site(site_name, original_url) -> str:
     vpn_service = VPNService(site_name, original_url)
     page = vpn_service.process_page()
     received_data_mb = vpn_service.calculate_site_stat()
-    SiteService(SiteRepository(db)).update_site_stat(site_name, received_data_mb)
+    SiteService(SiteRepository(db)).update_site_stat(site_name,
+                                                     received_data_mb)
     return render_template_string(str(page))
 
 

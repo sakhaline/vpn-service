@@ -6,6 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.extensions import db
 
+
 if TYPE_CHECKING:
     from .users import User
 
@@ -24,4 +25,5 @@ class Site(db.Model):
 
     user: Mapped["User"] = relationship(back_populates="sites")
 
-    __table_args__ = (UniqueConstraint("user_id", "url", name="unique_user_url"),)
+    __table_args__ = (UniqueConstraint("user_id", "url",
+                                       name="unique_user_url"),)

@@ -29,7 +29,8 @@ def create_site():
     form = CreateSiteForm()
     if request.method == "POST":
         if form.validate_on_submit():
-            SiteService(SiteRepository(db)).create_site(form.data, current_user.id)
+            SiteService(SiteRepository(db)).create_site(form.data,
+                                                        current_user.id)
             return redirect(url_for("profile.get_profile"))
         invalid_url_handler()
     return render_template("sites/site_create.html", form=form)
