@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="text-align: center; margin: 20 auto;">Update Site</h1>
+
+    <form action="{{ url_for('profile.update_site', site_id=site_id) }}" method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.name.label }} {{ form.name(value=site.name) }}
+      {{ form.url.label }} {{ form.url(value=site.url) }}
+      {{ form.submit }}
+    </form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    {{ super() }}  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+{% endblock %}
+{% block content %}
+    <h1 style="text-align: center; margin: 20 auto;">Register</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }} {{ form.username }}
+        {{ form.email.label }} {{ form.email }}
+        {{ form.password.label }} {{ form.password }}
+        {{ form.submit }}
+    </form>
+
+    {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+    {% endif %}
+{% endblock %}
