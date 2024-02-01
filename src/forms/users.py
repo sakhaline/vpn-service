@@ -14,5 +14,7 @@ class RegisterUserForm(LoginUserForm):
     submit = SubmitField("Sign up")
 
 
-class UpdateUserForm(LoginUserForm):
+class UpdateUserForm(FlaskForm):
+    username = StringField(validators=[DataRequired()])
+    email = EmailField(validators=[DataRequired()])
     submit = SubmitField("Submit")
