@@ -1,15 +1,14 @@
-from flask import (Blueprint, request, render_template,
-                   redirect, url_for, Response)
+from flask import (Blueprint, Response, redirect,
+                   render_template, request, url_for)
+from flask_login import current_user, login_required
 
-from flask_login import login_required, current_user
-
-from ..services.user_service import UserService
-from ..repositories.user_repo import UserRepository
 from ..extensions import db
 from ..forms.users import LoginUserForm, RegisterUserForm, UpdateUserForm
+from ..repositories.user_repo import UserRepository
+from ..services.user_service import UserService
 
 
-account = Blueprint("account", __name__, url_prefix='/account')
+account = Blueprint("account", __name__, url_prefix="/account")
 
 
 @account.route("/register", methods=["GET", "POST"])
@@ -46,7 +45,6 @@ def update_user():
     if request.method == "POST":
         print(form.data)
         if form.validate_on_submit():
-            UserService(UserRepository(db)).update_user(current_user,
-                                                        form.data)
+            UserService(UserRepository(db)).update_user(current_user, form.data)
         return redirect(url_for("profile.get_profile"))
     return render_template("account/update.html", form=form)

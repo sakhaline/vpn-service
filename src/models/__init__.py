@@ -1,5 +1,5 @@
-from .users import User
 from ..extensions import login_manager
+from .users import User
 
 
 @login_manager.user_loader

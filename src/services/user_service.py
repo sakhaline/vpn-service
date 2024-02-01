@@ -1,5 +1,5 @@
 from flask import abort
-from flask_login import logout_user, login_user
+from flask_login import login_user, logout_user
 from sqlalchemy.exc import IntegrityError
 
 from ..extensions import bcrypt
@@ -12,11 +12,15 @@ class UserService:
     def create_user(self, data):
         try:
             data["password"] = self.hash_user_password(data["password"])
-            return self.user_repo.create_user({"password": data["password"],
-                                               "email": data["email"],
-                                               "username": data["username"]})
+            return self.user_repo.create_user(
+                {
+                    "password": data["password"],
+                    "email": data["email"],
+                    "username": data["username"],
+                }
+            )
         except IntegrityError:
-            abort(400, 'User already exists')
+            abort(400, "User already exists")
 
     def get_user_by_id(self, user_id):
         user = self.user_repo.get_user_by_id(user_id)
@@ -31,7 +35,7 @@ class UserService:
         try:
             return self.user_repo.update_user(user, data)
         except IntegrityError:
-            abort(400, 'User already exists')
+            abort(400, "User already exists")
 
     def hash_user_password(self, password):
         return bcrypt.generate_password_hash(password)
