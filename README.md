@@ -33,7 +33,8 @@ Follow these steps to set up and run the project locally using Docker Compose.
 5. Build and run with Docker Compose:
     ```bash
     docker-compose up --build
-Access the Application
+6. Access the Application.
+
 Go to the ``http://localhost:5000`` in your web browser to access the VPN Service.
 
 ### Usage
