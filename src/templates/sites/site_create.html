@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style="text-align: center; margin: 20 auto;">Create Site</h1>
+
+    <form action="{{ url_for('profile.create_site') }}" method="POST">
+      {{ form.hidden_tag() }}
+      {{ form.name.label }} {{ form.name }}
+      {{ form.url.label }} {{ form.url }}
+      {{ form.submit }}
+    </form>
+{% endblock %}

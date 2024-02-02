@@ -1,0 +1,13 @@
+<nav class="navbar">
+    <ul class="nav-links">
+        <li><a href="{{ url_for('main.home') }}">Home</a></li>
+        {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('profile.get_profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('vpn.get_stat') }}">Statistics</a></li>
+            <li><a href="{{ url_for('account.logout') }}">Logout</a></li>
+        {% else %}
+            <li><a href="{{ url_for('account.login') }}">Login</a></li>
+            <li><a href="{{ url_for('account.register') }}">Register</a></li>
+        {% endif %}
+    </ul>
+</nav>

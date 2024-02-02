@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+
+<h1 style="text-align: center; margin: 20 auto;">Statistics</h1>
+
+<section>
+    <div class="statistics-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Site Name</th>
+                        <th>Page transitions via VPN</th>
+                        <th>Data Received (MB)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for site in sites %}
+                    <tr>
+                        <td>{{ site.name }}</td>
+                        <td>{{ site.page_visits }}</td>
+                        <td>{{ site.data_received }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
