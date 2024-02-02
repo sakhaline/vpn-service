@@ -24,7 +24,7 @@ Follow these steps to set up and run the project locally using Docker Compose.
    git clone https://github.com/sakhaline/vpn-service.git
 2. Navigate to the project directory:
     ```bash
-    cd app
+    cd vpn-service
 3. Copy the environment file:
     ```bash
     cp .env-sample .env
