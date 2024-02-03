@@ -44,8 +44,9 @@ class UserService:
             abort(401, description="Invalid username")
 
         bytes_password_hash_from_db = binascii.unhexlify(user.password[2:])
-        if bcrypt.check_password_hash(bytes_password_hash_from_db,
-                                      login_data["password"]):
+        if bcrypt.check_password_hash(
+            bytes_password_hash_from_db, login_data["password"]
+        ):
             login_user(user, remember=True)
         else:
             abort(401, description="Invalid password")
