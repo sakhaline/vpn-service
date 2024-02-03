@@ -26,12 +26,18 @@ class VPNService:
             if href and not href.startswith(("http://", "https://", "www.")):
                 link["href"] = f"{self.site_name}{self.original_url}/{href}"
 
+    def get_page_elements(self):
+        return self.soup.find_all(["script", "link", "img", "form"])
+
     def external_resource_handler(self) -> None:
-        for element in self.soup.find_all(["script", "img", "link"]):
+        for element in self.get_page_elements():
             if "href" in element.attrs:
                 element["href"] = urljoin(self.original_url, element["href"])
             elif "src" in element.attrs:
                 element["src"] = urljoin(self.original_url, element["src"])
+            elif "action" in element.attrs:
+                element["action"] = urljoin(self.original_url,
+                                            element["action"])
 
     def process_page(self) -> BeautifulSoup:
         self.intercept_request()

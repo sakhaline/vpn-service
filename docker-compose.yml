@@ -7,6 +7,11 @@ services:
       - "5432:5432"
     env_file:
       - .env
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   web:
     restart: always
     container_name: web
