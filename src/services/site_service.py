@@ -24,7 +24,7 @@ class SiteService:
                                               {"name": data["name"],
                                                "url": data["url"]})
         except IntegrityError:
-            abort(400, 'Site already exists')
+            abort(400, "Site doesn't exists")
 
     def update_site_stat(self, site_name, received_data_mb):
         return self.site_repo.update_site_stat(site_name, received_data_mb)

@@ -26,4 +26,4 @@ class Site(db.Model):
     user: Mapped["User"] = relationship(back_populates="sites")
 
     __table_args__ = (UniqueConstraint("user_id", "url",
-                                       name="unique_user_url"),)
+                                       name="unique_user_url"))
