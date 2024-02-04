@@ -1,11 +1,10 @@
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, request, url_for, abort
 from flask_login import current_user, login_required
 
 from ..extensions import db
 from ..forms.sites import CreateSiteForm, UpdateSiteForm
 from ..repositories.site_repo import SiteRepository
 from ..services.site_service import SiteService
-from ..validators import invalid_url_handler
 
 
 profile = Blueprint("profile", __name__, url_prefix="/profile")
@@ -32,7 +31,7 @@ def create_site():
             SiteService(SiteRepository(db)).create_site(form.data,
                                                         current_user.id)
             return redirect(url_for("profile.get_profile"))
-        invalid_url_handler()
+        abort(400, description="Invalid URL: No scheme supplied.")
     return render_template("sites/site_create.html", form=form)
 
 
@@ -45,7 +44,7 @@ def update_site(site_id):
         if form.validate_on_submit():
             service.update_site(form.data, site_id=site_id)
             return redirect(url_for("profile.get_profile"))
-        invalid_url_handler()
+        abort(400, description="Invalid URL: No scheme supplied.")
 
     site = service.get_site_by_id(site_id)
     context = {"form": form, "site": site, "site_id": site_id}
