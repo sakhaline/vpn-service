@@ -40,12 +40,10 @@ def update_site(site_id):
     service = SiteService(SiteRepository(db))
     form = UpdateSiteForm()
     if request.method == "POST":
-
         if form.validate_on_submit():
             service.update_site(form.data, site_id=site_id)
             return redirect(url_for("profile.get_profile"))
         abort(400, description="Invalid URL: No scheme supplied.")
-
     site = service.get_site_by_id(site_id)
     context = {"form": form, "site": site, "site_id": site_id}
     return render_template("sites/site_update.html", **context)
